@@ -24,5 +24,16 @@ router.get('',async(req,res) => {
         
     }
 })
+router.get('/:id',async(req,res) => {
+    try {
+        
+        const flat = await Flat.findById(req.params.id).populate('resident_id').lean().exec();
+        return res.send(flat)
+
+    } catch (error) {
+        return res.send('error in flat controller :', error)
+        
+    }
+})
 
 module.exports = router

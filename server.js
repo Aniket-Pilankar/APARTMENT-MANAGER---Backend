@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const cors = require('cors')
 
@@ -17,7 +18,7 @@ app.post('/login',login)
 app.use('/resident',residentController)
 app.use('/flat',flatController)
 
-app.listen(4040, async() => {
+app.listen(process.env.PORT || 4040, async() => {
     try {
         await connect();
         console.log('Listening to port 4040');
