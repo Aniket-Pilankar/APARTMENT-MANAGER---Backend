@@ -8,7 +8,16 @@ router.post('',async(req,res) => {
         const resident = await Resident.create(req.body);
         return res.send(resident)
     } catch(e){
-        res.send(error.message)
+        return res.send(error.message)
+    }
+})
+
+router.get('', async(req,res) => {
+    try {
+        const resident = await Resident.find().lean().exec()
+        return res.send(resident)
+    } catch (error) {
+        return res.send('error in resident Controller',error.message)
     }
 })
 

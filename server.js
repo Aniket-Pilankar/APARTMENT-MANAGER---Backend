@@ -18,6 +18,7 @@ app.post('/login',login)
 app.use('/resident',residentController)
 app.use('/flat',flatController)
 
+// app.listen(4040, async() => {
 app.listen(process.env.PORT || 4040, async() => {
     try {
         await connect();
