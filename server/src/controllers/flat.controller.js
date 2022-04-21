@@ -40,7 +40,7 @@ router.get('/:id',async(req,res) => {
 router.patch('/:id',async(req,res) => {
     try {
         
-        const flat = await Flat.findByIdAndUpdate(req.params.id,req.body,{new:true}).populate('resident_id').lean().exec();
+        const flat = await Flat.findByIdAndUpdate(req.params.id,req.body,{new:true}).populate('resident_id')
         return res.send(flat)
 
     } catch (error) {
