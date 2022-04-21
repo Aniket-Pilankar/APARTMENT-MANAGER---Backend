@@ -37,6 +37,17 @@ router.get('/:id',async(req,res) => {
         
     }
 })
+router.patch('/:id',async(req,res) => {
+    try {
+        
+        const flat = await Flat.findByIdAndUpdate(req.params.id,req.body,{new:true}).populate('resident_id').lean().exec();
+        return res.send(flat)
+
+    } catch (error) {
+        return res.send('error in flat controller :', error)
+        
+    }
+})
 
 router.delete('/:id',async(req,res) => {
     try {
