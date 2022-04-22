@@ -17,8 +17,10 @@ router.post('',async(req,res) => {
 
 router.get('',async(req,res) => {
     try {
-        
-        const flat = await Flat.find().populate({path:'resident_id'}).lean().exec();
+        const page = req.query.page || 1;
+        const size = req.query.size || 5;
+        // const flat = await Flat.find().populate({path:'resident_id'}).lean().exec();
+        const flat = await Flat.find().skip((page - 1) * size).limit(size).populate({path:'resident_id'}).lean().exec();
         return res.send(flat)
 
     } catch (error) {
