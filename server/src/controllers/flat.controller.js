@@ -19,9 +19,9 @@ router.get('',async(req,res) => {
     try {
         const page = req.query.page || 1;
         const size = req.query.size || 5;
-        const totalPage = Math.ceil(await Flat.find().countDocuments()) / size
         // const flat = await Flat.find().populate({path:'resident_id'}).lean().exec();
         const flat = await Flat.find().skip((page - 1) * size).limit(size).populate({path:'resident_id'}).lean().exec();
+        const totalPage = Math.ceil(await Flat.find().countDocuments() / size) 
         // return res.send(flat)
         return res.send({flat,totalPage})
 
