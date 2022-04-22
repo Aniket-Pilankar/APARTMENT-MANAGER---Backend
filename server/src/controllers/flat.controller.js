@@ -17,6 +17,7 @@ router.post('',async(req,res) => {
 
 router.get('',async(req,res) => {
     try {
+        console.log('allget')
         const page = req.query.page || 1;
         const size = req.query.size || 5;
         // const flat = await Flat.find().populate({path:'resident_id'}).lean().exec();
@@ -26,7 +27,7 @@ router.get('',async(req,res) => {
         return res.send({flat,totalPage})
 
     } catch (error) {
-        return res.send('error in flat controller :', error)
+        return res.send('error in flat controller1 :', error)
         
     }
 })
@@ -59,6 +60,22 @@ router.delete('/:id',async(req,res) => {
         return res.send(flat)
     } catch (error) {
         return res.send('error in flat controller:',error)
+    }
+})
+
+router.get('/sortBy/:val',async(req,res) => {
+    try {
+        // const value = req.query.sortValue || 1;
+        // console.log('value23:', value)
+        // // const flat = await Flat.find().sort({"BlockNo":value}).lean().exec()
+        // // return res.send(flat)
+        console.log(req.params.val)
+        let value = req.params.val
+        const flat = await Flat.find().sort({"BlockNo":value}).lean().exec()
+        return res.send(flat)
+
+    } catch (error) {
+        return res.send('error in flat controller /sortBy:',error)
     }
 })
 
